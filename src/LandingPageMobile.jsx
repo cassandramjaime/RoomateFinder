@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import ApplyForm from './ApplyForm';
 
 const images = [
   process.env.PUBLIC_URL + "/images/living-room.jpg",     
@@ -25,6 +26,7 @@ const styles = {
 };
 
 export default function LandingPageMobile() {
+  const [showApply, setShowApply] = useState(false);
   return (
     <div style={styles.wrapper}>
       <section style={styles.hero}>
@@ -36,7 +38,7 @@ export default function LandingPageMobile() {
               <img src={url} key={i} alt={`House view ${i + 1}`} style={{ ...styles.imageBox, width: "100%", maxWidth: "175px" }} />
             ))}
           </div>
-          <a href="#apply" style={styles.applyBtn}>Apply Now</a>
+          <button onClick={() => setShowApply(true)} style={{ ...styles.applyBtn, border: 'none', cursor: 'pointer' }}>Apply Now</button>
         </div>
       </section>
       <section style={styles.section}>
@@ -80,7 +82,7 @@ export default function LandingPageMobile() {
           <p style={{ fontSize: "1.12rem" }}>
             Fill out a quick application!
             <br />
-            <a href="mailto:cristina@email.com" style={{ display: "inline-block", background: "#F67280", color: "#fff", borderRadius: "2rem", fontWeight: 600, fontSize: "1.05rem", margin: "1em 0 0", padding: "0.6em 1.2em", textDecoration: "none" }}>Message Cristina</a>
+            <button onClick={() => setShowApply(true)} style={{ display: "inline-block", background: "#F67280", color: "#fff", borderRadius: "2rem", fontWeight: 600, fontSize: "1.05rem", margin: "1em 0 0", padding: "0.6em 1.2em", textDecoration: "none", border: 'none', cursor: 'pointer' }}>Apply Now</button>
           </p>
           <ul style={{ fontSize: "1rem", marginTop: "0.8em", color: "#555" }}>
             <li>Women only please</li>
@@ -118,6 +120,13 @@ export default function LandingPageMobile() {
           }
         `}
       </style>
+      <ApplyModalWrapper show={showApply} onClose={() => setShowApply(false)} />
     </div>
   );
+}
+
+// Render the modal at the end so it's on top
+function ApplyModalWrapper({ show, onClose }) {
+  if (!show) return null;
+  return <ApplyForm onClose={onClose} />;
 }
