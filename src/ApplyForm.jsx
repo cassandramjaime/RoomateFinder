@@ -77,9 +77,22 @@ export default function ApplyForm({ onClose }) {
     setSubmitted(true);
   }
 
+  // Add mobile-specific styles
+  const mobileStyles = window.innerWidth <= 600 ? {
+    modalStyle: {
+      width: '100%',
+      borderRadius: '12px 12px 0 0',
+      padding: '0.8rem 1rem'
+    },
+    overlayStyle: {
+      padding: '0',
+      alignItems: 'flex-end'
+    }
+  } : {};
+
   return (
-    <div style={overlayStyle} role="dialog" aria-modal="true">
-      <div style={modalStyle}>
+    <div style={{...overlayStyle, ...mobileStyles.overlayStyle}} role="dialog" aria-modal="true">
+      <div style={{...modalStyle, ...mobileStyles.modalStyle}}>
         <button onClick={onClose} style={closeBtnStyle} aria-label="Close">×</button>
         {!submitted ? (
           <>
@@ -175,9 +188,11 @@ const overlayStyle = {
   inset: 0,
   background: 'rgba(0,0,0,0.45)',
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'flex-start', // Changed from center to flex-start
   justifyContent: 'center',
-  zIndex: 9999
+  zIndex: 9999,
+  padding: '5vh 0', // Add some padding at the top and bottom
+  overflowY: 'auto' // Make the overlay itself scrollable
 };
 const modalStyle = {
   width: 'min(720px, 92%)',
@@ -185,7 +200,10 @@ const modalStyle = {
   padding: '1rem 1.25rem',
   borderRadius: 12,
   boxShadow: '0 8px 30px rgba(0,0,0,0.2)',
-  position: 'relative'
+  position: 'relative',
+  maxHeight: '90vh',
+  overflowY: 'auto',
+  WebkitOverflowScrolling: 'touch' // For smooth scrolling on iOS
 };
 const closeBtnStyle = {
   position: 'absolute',
