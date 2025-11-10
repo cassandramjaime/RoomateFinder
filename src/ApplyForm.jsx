@@ -45,35 +45,12 @@ export default function ApplyForm({ onClose }) {
     setErrors(e);
     if (Object.keys(e).length) return;
 
-    // Build an email body and open mail client
-    const subject = encodeURIComponent(`Room application from ${form.name}`);
-    const bodyLines = [
-      `Name: ${form.name}`,
-  `Email: ${form.email}`,
-  `Phone: ${form.phone}`,
-  `Move-in date: ${form.moveInDate}`,
-  `Preferred Zoom times:\n${form.zoomTimes}`,
-      `Desired lease length: ${form.leaseLength}`,
-      `Gender: ${form.gender}`,
-      `Felony conviction: ${form.felony}`,
-      `Pets: ${form.pets}`,
-      `About applicant:\n${form.about}`,
-      ``,
-      `Thank you for your application.`,
-      `If your application is a good fit, Cristina will reach out to schedule a follow-up and next steps.`
-    ];
-    const body = encodeURIComponent(bodyLines.join('\n'));
-    // Open mail client (mailto) but put the listing owner in BCC so their address
-    // is not shown in the To field. Use applicant email as the To recipient so
-    // clients that require a To field still open the composer.
-    try {
-      const to = encodeURIComponent(form.email);
-      const bcc = encodeURIComponent('cristinamjaime@gmail.com');
-      window.location.href = `mailto:${to}?bcc=${bcc}&subject=${subject}&body=${body}`;
-    } catch (err) {
-      console.warn('Could not open mail client', err);
-    }
-
+    // Replace this URL with your actual Google Form URL
+    const googleFormUrl = "https://forms.gle/2Sveitghada5sHDa8";
+    
+    // Open the Google Form in a new tab
+    window.open(googleFormUrl, '_blank');
+    
     setSubmitted(true);
   }
 
@@ -170,10 +147,10 @@ export default function ApplyForm({ onClose }) {
           </>
         ) : (
           <div>
-            <h3>Thanks — application submitted</h3>
-            <p>We've opened your mail client. If it didn't open, your application details are above — you can copy them into an email to Cristina.</p>
+            <h3>Complete Your Application</h3>
+            <p>We've opened the application form in a new tab. Please fill it out to complete your submission. After you submit the form, Cristina will review your application and reach out if it's a good fit.</p>
             <div style={{ textAlign: 'right' }}>
-              <button onClick={onClose} style={submitBtnStyle}>Done</button>
+              <button onClick={onClose} style={submitBtnStyle}>Close</button>
             </div>
           </div>
         )}
