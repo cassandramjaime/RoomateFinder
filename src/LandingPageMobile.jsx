@@ -58,6 +58,7 @@ export default function LandingPageMobile() {
         position: 'relative',
         height: '60vh',
         minHeight: '400px',
+        maxHeight: '500px',
         width: '100%',
         overflow: 'hidden'
       }}>
@@ -141,9 +142,9 @@ export default function LandingPageMobile() {
 
       {/* Property header: title, subtitle, facts and apply sidebar */}
       <section style={{ padding: '1.25rem 1rem' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto', display: 'flex', gap: '1rem', alignItems: 'flex-end' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto', display: 'flex', gap: '1rem', alignItems: 'flex-end', flexWrap: 'wrap' }}>
           {/* Left: title, subtitle, facts */}
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1, minWidth: '300px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap' }}>
               <div>
                 <div style={{ display: 'inline-block', background: '#E8F3FF', color: '#0366d6', padding: '6px 10px', borderRadius: 8, fontWeight: 700, fontSize: '0.85rem', marginBottom: 8 }}>Special offer</div>
@@ -188,7 +189,7 @@ export default function LandingPageMobile() {
       {/* Reorganized info: four sections using existing copy */}
       <section style={{ padding: '1.25rem 1rem' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
             {/* The Perks */}
             <div style={{ background: '#fff', padding: 16, borderRadius: 10, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
               <h3 style={{ margin: '0 0 8px', color: '#C06C84' }}>The Perks</h3>
@@ -355,12 +356,137 @@ export default function LandingPageMobile() {
       {/* Mobile Media Query Styles */}
       <style>
         {`
-          @media (max-width: 600px) {
-            .images-flex { flex-direction: column; gap: 1.1rem; align-items: center; }
-            img { max-width: 96vw !important; width: 100% !important; height: 28vw !important; min-height: 100px !important; }
-            h1 { font-size: 1.43rem !important; }
-            h2, h3 { font-size: 1.05rem !important; }
-            section { padding: 1.2rem 0.5rem 0!important; }
+          @media (max-width: 768px) {
+            /* Hero section responsive */
+            section:first-of-type {
+              height: 50vh !important;
+              min-height: 300px !important;
+              max-height: 400px !important;
+            }
+            
+            /* Hero titles */
+            h2 {
+              font-size: 1.3rem !important;
+            }
+            
+            h3 {
+              font-size: 1rem !important;
+            }
+            
+            /* Facts grid - 1 column on mobile */
+            div[style*="gridTemplateColumns: 'repeat(2"] {
+              grid-template-columns: 1fr !important;
+            }
+          }
+          
+          @media (max-width: 640px) {
+            body {
+              font-size: 15px;
+            }
+            
+            /* Stack apply sidebar */
+            div[style*="flex: 1, minWidth"] {
+              min-width: 100% !important;
+            }
+            
+            aside {
+              width: 100% !important;
+              margin-top: 1rem !important;
+            }
+            
+            /* Property header flex direction */
+            div[style*="display: 'flex', gap: '1rem', alignItems: 'flex-end', flexWrap: 'wrap'"] {
+              flex-direction: column !important;
+            }
+            
+            /* Main section padding */
+            section {
+              padding: 1rem 0.75rem 0 !important;
+            }
+            
+            /* Hero section height */
+            section:first-of-type {
+              height: 45vh !important;
+              min-height: 250px !important;
+              max-height: 350px !important;
+            }
+            
+            /* Title sizes */
+            h1 {
+              font-size: 1.2rem !important;
+            }
+            
+            h2 {
+              font-size: 1.15rem !important;
+            }
+            
+            h3 {
+              font-size: 0.95rem !important;
+            }
+            
+            /* Card padding */
+            div[style*="padding: 16, borderRadius: 10"] {
+              padding: 12px !important;
+            }
+            
+            /* Text sizes */
+            p, li, dd {
+              font-size: 0.95rem !important;
+            }
+            
+            /* Button sizing */
+            button {
+              font-size: 1rem !important;
+              padding: 0.7rem 1rem !important;
+            }
+            
+            /* Reduce gap in flex containers */
+            div[style*="gap: '1rem'"] {
+              gap: 0.75rem !important;
+            }
+            
+            div[style*="gap: 16"] {
+              gap: 12px !important;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            /* Extra small screens */
+            section {
+              padding: 0.8rem 0.5rem 0 !important;
+            }
+            
+            h1 {
+              font-size: 1.1rem !important;
+            }
+            
+            h2 {
+              font-size: 1rem !important;
+            }
+            
+            h3 {
+              font-size: 0.9rem !important;
+            }
+            
+            p, li, dd, strong {
+              font-size: 0.9rem !important;
+            }
+            
+            /* Hero section */
+            section:first-of-type {
+              height: 40vh !important;
+              min-height: 220px !important;
+              max-height: 300px !important;
+            }
+            
+            div[style*="padding: 14, borderRadius: 12"] {
+              padding: 12px !important;
+            }
+            
+            button {
+              font-size: 0.95rem !important;
+              padding: 0.65rem 0.9rem !important;
+            }
           }
         `}
       </style>
